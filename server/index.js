@@ -17,6 +17,7 @@ mongoose.connect('mongodb+srv://Sara:screw.the.world@cluster0.otpuf.mongodb.net/
 .then(() => console.log('DB connected'))
 .catch((err) =>{ console.log(err)})
 
+mongoose.set('useCreateIndex', true)
 
 app.use('/' , routes)
 

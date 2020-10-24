@@ -19,7 +19,6 @@ exports.signup = async (req, res) =>{
             // if the username doesn't exist
             // hash the password
             let hashedPassword = await bcrypt.hash(password, 10)
-            console.log(hashedPassword);
 
             // create a document of the new user
             let user = new UserSchema({
@@ -41,4 +40,58 @@ exports.signup = async (req, res) =>{
 
 exports.signin = async (req, res) =>{
     let {userName , password} = req.body;
+
+    try {
+        let user = await UserSchema.findOne({userName})
+        
+        if(user){
+
+            var result = await bcrypt.compare(password, user.password)
+
+                if(result){
+                    res.send('Welcome again')
+                } else {
+                    res.send('incorrect password')
+                }
+
+            } else {
+            res.send('username is incorrect')
+        }
+    } catch (error) {
+        
+    }
+}
+
+
+exports.addTask = async (req, res) =>{
+    let { userName } = req.params;
+    let { task } = req.body
+    let user = await UserSchema.findOne({userName})
+
+    if(user){
+        
+        user.tasks.push(task)
+        user.save()
+        .then(() => { res.send('task added') })
+        .catch((error) => { console.log(error) })
+    }
+}
+
+exports.removeTask = async (req , res) => {
+    let { userName } = req.params;
+    let { task } = req.body;
+
+    let user = await UserSchema.findOne({userName})
+
+    if(user){
+        taskArray = user.tasks;
+        for(var i = 0 ; i < taskArray.length ; i++){
+            if( task === taskArray[i] ){
+                taskArray.splice(i , 1)
+                user.save()
+                .then(() => {res.send('task removed')})
+                .catch((err) => { console.log(err) })
+            }
+        }
+    }
 }
