@@ -13,7 +13,7 @@ exports.signup = async (req, res) =>{
         let finduser = await UserSchema.findOne({userName})
 
         if(finduser){
-            res.send('user name is used')
+            res.send('username is used')
         } else {
 
             // if the username doesn't exist
@@ -29,9 +29,9 @@ exports.signup = async (req, res) =>{
             // save the new user
             user.save()
             .then(() => {
-                res.send('Welcome')
+                res.send({message : 'Welcome' , name : user.userName})
             })
-            .catch((err) => console.log(err))
+            .catch((err) => console.log(err , 'error in sign up'))
         }
     } catch (error) {
         console.log(error);
@@ -49,13 +49,13 @@ exports.signin = async (req, res) =>{
             var result = await bcrypt.compare(password, user.password)
 
                 if(result){
-                    res.send('Welcome again')
+                    res.send({message : 'Welcome again' , name : user.userName})
                 } else {
-                    res.send('incorrect password')
+                    res.send({message : 'incorrect password'})
                 }
 
             } else {
-            res.send('username is incorrect')
+            res.send({message : 'username is incorrect'})
         }
     } catch (error) {
         
@@ -77,21 +77,47 @@ exports.addTask = async (req, res) =>{
     }
 }
 
+// exports.removeTask = async (req , res) => {
+//     let { userName } = req.params;
+//     let { task } = req.body;
+
+//     let user = await UserSchema.findOne({userName})
+
+//     if(user){
+//         taskArray = user.tasks;
+//         for(var i = 0 ; i < taskArray.length ; i++){
+//             if( task === taskArray[i] ){
+//                 taskArray.splice(i , 1)
+//                 user.save()
+//                 .then(() => {res.send('task removed')})
+//                 .catch((err) => { console.log(err) })
+//             }
+//         }
+//     }
+// }
+
 exports.removeTask = async (req , res) => {
     let { userName } = req.params;
-    let { task } = req.body;
-
+    let { index } = req.body;
+    index = Number(index)
     let user = await UserSchema.findOne({userName})
 
     if(user){
         taskArray = user.tasks;
-        for(var i = 0 ; i < taskArray.length ; i++){
-            if( task === taskArray[i] ){
-                taskArray.splice(i , 1)
-                user.save()
-                .then(() => {res.send('task removed')})
-                .catch((err) => { console.log(err) })
-            }
-        }
+        taskArray.splice(index , 1)
+        user.save()
+        .then(() => {res.send('task removed')})
+        .catch((err) => { console.log(err) })
     }
 }
+
+exports.allTasks = async (req , res) => {
+    let { userName } = req.params
+
+    let user = await UserSchema.findOne({userName})
+
+    if(user){
+        res.send(user.tasks)
+    }
+}
+
