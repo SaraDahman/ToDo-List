@@ -12,8 +12,11 @@ function Signin (props){
         axios.post('/signin' , {userName : userName , password : password})
         .then((response) => {
             Swal.fire(response.data.message)
-            localStorage.setItem('name',  response.data.name )
-            props.history.push('/list')
+
+            if(response.data.message === 'Welcome again'){
+                localStorage.setItem('name',  response.data.name )
+                props.history.push('/list')
+            }
         })
         .catch((error) => {
             console.log(error);
@@ -21,6 +24,7 @@ function Signin (props){
     }
     return(
         <div className='container'>
+            <h1>Sign in</h1>
             <label> Username </label>
             <input type='text' value={userName} name='userName' onChange= {(e) => setUserName(e.target.value)}></input>
             <label> Password </label>

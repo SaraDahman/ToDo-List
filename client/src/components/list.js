@@ -22,7 +22,7 @@ function Todo (props) {
     let addTask = (e) => {
         axios.post(`/add/${userName}`, {task : task})
         .then((response) => {
-            Swal.fire(response.data)
+            // Swal.fire(response.data)
             setCounter(counter+1)
             setTask('')
         })
@@ -38,8 +38,9 @@ function Todo (props) {
           })
         
         // e.target.parentNode.textContent
-
-        e.target.parentNode.style.backgroundColor = '#b3e6ff'
+          console.log(e.currentTarget);
+          e.currentTarget.parentElement.style.backgroundColor = '#b3e6ff'
+        // e.target.parentNode.style.backgroundColor = '#b3e6ff'
     }
 
     let deleteTask = (e) => {

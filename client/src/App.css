@@ -1,24 +1,16 @@
-/* body {
+body {
   background-image: url(./pics/cosmos.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-} */
+  font-family: 'Grandstander', cursive;
+  color: white;
+}
 
 button {
   cursor: pointer;
 }
 
-.buttons {
-  /* border: solid white 2px; */
-  width: 20%;
-  margin: auto;
-  margin-top: 270px;
-  text-align: center;
-  padding: 60px;
-  background-color: rgb(255, 255, 255, 0.3);
-}
-
-.buttons button {
+button {
   width: 160px;
   height: 40px;
   margin: 6px;
@@ -30,17 +22,70 @@ button {
   text-transform: uppercase;
 }
 
+h1{
+  font-size: 45px;
+  text-transform: uppercase;
+}
+/* ----------------- */
+.buttons {
+  /* border: solid white 2px; */
+  width: 20%;
+  margin: auto;
+  margin-top: 60px;
+  text-align: center;
+  padding: 60px;
+  background-color: rgb(255, 255, 255, 0.3);
+}
 
-/* ------------ */
+.firstPage{
+  /* border: solid white 2px; */
+  text-align: center;
+}
 
-/* .container{
-  background-color: white;
+.firstPage p {
+  margin-top: 200px;
+  font-size: 80px;
+  opacity: 0;
+  animation: title 4s infinite;
+
+}
+
+@keyframes title {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* ------ signin signup------ */
+.container {
+  /* border: solid black 2px; */
+  width: 20%;
+  margin: auto;
+  margin-top: 200px;
   height: 300px;
-} */
+  text-align: center;
+}
+
+.container label {
+  display: block;
+  text-align: left;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.container input {
+  display: block;
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0px 20px 0px;
+  font-size: 15px;
+}
 
 /* ------ list -----*/
-.list{
-  border: solid black 2px;
+.list {
+  /* border: solid black 2px; */
   width: 60%;
   margin: auto;
   margin-top: 100px;
@@ -48,27 +93,48 @@ button {
   text-align: center;
 }
 
-/* .list h1 {
-  text-align: center;
-} */
+.list input {
+  height: 35px;
+  margin-bottom: 4px;
+  margin-right: 20px;
+  width: 50%;
+  font-size: 15px;
+
+}
 
 .list ul {
   list-style-type: none;
-  border: solid black 2px;
+  /* border: solid black 2px; */
+  margin-top: 50px;
 }
 
 .list ul li {
-  margin: 10px;
-  border: solid red 1px;
-  padding: 15px;
+  margin: 20px;
+  border: solid rgb(87, 85, 85) 3px;
+  padding: 20px;
   text-align: left;
+  font-size: 27px;
+  background-color: white;
+  border-radius: 10px;
+  color: black;
 }
 
 .list ul li span {
   float: right;
-  border: solid black 1px;
-  margin: 4px;
-  padding: 0px 4px;
+  /* border: solid rgb(110, 108, 108) 2px; */
+  margin-right: 6px;
+  padding: 1px 5px;
   cursor: pointer;
   background-color: white;
+  font-size: 20px;
+}
+
+.list ul li span:nth-child(1){
+  background-color: rgb(20, 196, 20);
+  color: aliceblue;
+}
+
+.list ul li span:nth-child(2){
+  background-color: rgb(216, 52, 46);
+  color: aliceblue;
 }

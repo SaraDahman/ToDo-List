@@ -9,19 +9,24 @@ function Signup (props){
     const [userName , setUserName] = useState('')
     const [ password , setPassword ] = useState('')
     
-    let submit = (e) =>{
+    let submit = (e) => {
         axios.post('/signup' , {userName : userName , password : password})
         .then((response) => {
             Swal.fire(response.data.message)
-            localStorage.setItem('name',  response.data.name )
-            props.history.push('/list')
+            
+            if(response.data.message === 'Welcome'){
+                localStorage.setItem('name',  response.data.name )
+                props.history.push('/list')
+            }
         })
         .catch((error) => {
             console.log(error);
         })
     }
+
     return(
         <div className='container'>
+            <h1>Sign up</h1>
             <label> Username </label>
             <input type='text' value={userName} name='userName' onChange= {(e) => setUserName(e.target.value)}></input>
             <label> Password </label>

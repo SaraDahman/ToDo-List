@@ -13,7 +13,7 @@ exports.signup = async (req, res) =>{
         let finduser = await UserSchema.findOne({userName})
 
         if(finduser){
-            res.send('username is used')
+            res.send({message : 'username is used'})
         } else {
 
             // if the username doesn't exist
@@ -55,7 +55,7 @@ exports.signin = async (req, res) =>{
                 }
 
             } else {
-            res.send({message : 'username is incorrect'})
+            res.send({message : 'username doesn\'t exist'})
         }
     } catch (error) {
         
